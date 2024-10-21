@@ -9,46 +9,32 @@ import {
 
 const Sidebar = () => {
   return (
-    // celular
-    // pantallas grandes
-    <div className="bg-slate-800 flex-none w-14">
-      <div className="h-20 items-center justify-center flex ">
+    <div className="bg-slate-800 flex-none w-14 lg:w-44 transition-all delay-200 ease-linear">
+      <a href="#" className="h-20 mb-4 items-center justify-center flex ">
         <ClipboardDocumentCheckIcon
           width={40}
           className="text-gray-300 hover:text-white transition-colors  sm:fixed "
         />
-      </div>
-
+      </a>
       <div className="fixed left-3 space-y-4">
-
-        <div className="cursor-pointer rounded-lg lg:p-2 space-x-2 flex items-center">
-          <ChartBarIcon
-            className="bg-gray-600 p-2 w-10 rounded-lg text-gray-300 lg:w-8 hover:bg-slate-800"
-          />
-          <span className="hidden lg:block font-semibold text-white">Dashboard</span>
-        </div>
-
-        <div className="space-x-2 flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-500 transition-colors">
-          <ChartBarIcon
-            className="bg-gray-600 p-2 w-8 rounded-lg text-gray-300"
-          />
-          <span className="font-semibold text-white">Dashboard</span>
-        </div>
-
-
-
-        <div className=" space-x-2 flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-500 transition-colors">
-          <UsersIcon
-            className="bg-gray-600 p-2 w-8 rounded-lg text-gray-300"
-          />
-          <span className="font-semibold text-white">Usuarios</span>
-        </div>
-        <div className=" space-x-2 flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-500 transition-colors">
-          <EnvelopeIcon
-            className="bg-gray-600 p-2 w-8 rounded-lg text-gray-300"
-          />
-          <span className="font-semibold text-white">Correo</span>
-        </div>
+        <a href="#" className="option active">
+          <ChartBarIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8 active" />
+          <span className="hidden lg:block font-semibold text-white">
+            Dashboard
+          </span>
+        </a>
+        <a href="#" className="option">
+          <UsersIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
+          <span className="hidden lg:block font-semibold text-white">
+            Usuarios
+          </span>
+        </a>
+        <a href="#" className="option">
+          <EnvelopeIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
+          <span className="hidden lg:block font-semibold text-white">
+            Correo
+          </span>
+        </a>
 
         {/*  <UsersIcon
           width={40}
@@ -63,19 +49,13 @@ const Sidebar = () => {
           className="bg-gray-600 p-2 rounded-lg mb-4 text-gray-300"
         /> */}
       </div>
-      <div className="fixed bottom-4 left-3 sm:left-6">
-        {/* <a href="#top">
-          <ArrowUpIcon
-            width={40}
-            className="bg-gray-600 p-2 rounded-lg mb-4 text-gray-300"
-          />
-        </a> */}
-        <div className=" space-x-2 flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-500 transition-colors">
-          <ArrowLeftStartOnRectangleIcon
-            className="bg-gray-600 p-2 w-8 rounded-lg text-gray-300"
-          />
-          <span className="font-semibold text-white">Salir</span>
-        </div>
+      <div className="fixed bottom-4 left-3">
+        <a className="option">
+          <ArrowLeftStartOnRectangleIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
+          <span className="hidden lg:block font-semibold text-white">
+            Salir
+          </span>
+        </a>
       </div>
     </div>
   );

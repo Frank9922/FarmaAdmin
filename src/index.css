@@ -5,7 +5,12 @@
 body {
   background-color: #1e293b;
 }
-
+.option {
+  @apply block space-x-2 cursor-pointer rounded-lg hover:bg-gray-500 hover:text-white lg:p-2   lg:flex items-center  transition-colors;
+}
+.active {
+  @apply text-white bg-gray-500;
+}
 * {
   scroll-behavior: smooth;
 }
