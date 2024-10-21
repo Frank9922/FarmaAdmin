@@ -11,7 +11,7 @@ const Sidebar = () => {
   return (
     // celular
     // pantallas grandes
-    <div className="bg-slate-800 flex-none w-44">
+    <div className="bg-slate-800 flex-none w-14">
       <div className="h-20 items-center justify-center flex ">
         <ClipboardDocumentCheckIcon
           width={40}
@@ -19,25 +19,33 @@ const Sidebar = () => {
         />
       </div>
 
-      <div className="fixed left-3 space-y-4 sm:left-6 top-[100px]">
-        <div className=" lg:space-x-2 flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-500 transition-colors">
+      <div className="fixed left-3 space-y-4">
+
+        <div className="cursor-pointer rounded-lg lg:p-2 space-x-2 flex items-center">
           <ChartBarIcon
-            width={35}
-            className="bg-gray-600 p-2  rounded-lg text-gray-300"
+            className="bg-gray-600 p-2 w-10 rounded-lg text-gray-300 lg:w-8 hover:bg-slate-800"
+          />
+          <span className="hidden lg:block font-semibold text-white">Dashboard</span>
+        </div>
+
+        <div className="space-x-2 flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-500 transition-colors">
+          <ChartBarIcon
+            className="bg-gray-600 p-2 w-8 rounded-lg text-gray-300"
           />
           <span className="font-semibold text-white">Dashboard</span>
         </div>
+
+
+
         <div className=" space-x-2 flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-500 transition-colors">
           <UsersIcon
-            width={35}
-            className="bg-gray-600 p-2  rounded-lg text-gray-300"
+            className="bg-gray-600 p-2 w-8 rounded-lg text-gray-300"
           />
           <span className="font-semibold text-white">Usuarios</span>
         </div>
         <div className=" space-x-2 flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-500 transition-colors">
           <EnvelopeIcon
-            width={35}
-            className="bg-gray-600 p-2  rounded-lg text-gray-300"
+            className="bg-gray-600 p-2 w-8 rounded-lg text-gray-300"
           />
           <span className="font-semibold text-white">Correo</span>
         </div>
@@ -64,8 +72,7 @@ const Sidebar = () => {
         </a> */}
         <div className=" space-x-2 flex items-center cursor-pointer p-2 rounded-lg hover:bg-gray-500 transition-colors">
           <ArrowLeftStartOnRectangleIcon
-            width={35}
-            className="bg-gray-600 p-2 rounded-lg text-gray-300"
+            className="bg-gray-600 p-2 w-8 rounded-lg text-gray-300"
           />
           <span className="font-semibold text-white">Salir</span>
         </div>
