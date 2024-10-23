@@ -1,4 +1,3 @@
-import React from "react";
 import {
   ChartBarIcon,
   EnvelopeIcon,
@@ -17,8 +16,8 @@ const Sidebar = () => {
         />
       </a>
       <div className="fixed left-3 space-y-4">
-        <a href="#" className="option active">
-          <ChartBarIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8 active" />
+        <a href="#" className="option">
+          <ChartBarIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
           <span className="hidden lg:block font-semibold text-white">
             Dashboard
           </span>
