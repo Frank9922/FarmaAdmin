@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StopCircleIcon } from "@heroicons/react/24/solid";
 import {
   Badge,
@@ -12,53 +12,22 @@ import {
   Text,
   Title,
 } from "@tremor/react";
-
-const data = [
-  {
-    Nombre: "Viola Amherd",
-    profesion: "Estudiante",
-    correo: "correo@example.com",
-    status: "active",
-  },
-  {
-    Nombre: "Simonetta Sommaruga",
-    profesion: "Docente",
-    correo: "correo@example.com",
-    status: "active",
-  },
-  {
-    Nombre: "Alain Berset",
-    profesion: "Personal de Salud",
-    correo: "correo@example.com",
-    status: "active",
-  },
-  {
-    Nombre: "Ignazio Cassis",
-    profesion: "Personal de Salud",
-    correo: "correo@example.com",
-    status: "active",
-  },
-  {
-    Nombre: "Karin Keller-Sutter",
-    profesion: "Estudiante",
-    correo: "correo@example.com",
-    status: "active",
-  },
-  {
-    Nombre: "Guy Parmelin",
-    profesion: "Personal de Salud",
-    correo: "correo@example.com",
-    status: "active",
-  },
-  {
-    Nombre: "Elisabeth Baume-Schneider",
-    profesion: "Docente",
-    correo: "correo@example.com",
-    status: "active",
-  },
-];
+import { api } from "../api/api";
 
 const TableComponent = () => {
+  const [users, setUsers] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await api("usuarios");
+      // console.log(data);
+      if (data.status == 200) {
+        setUsers(data.data.data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Card className="mt-4">
       <Title>Listado de Usuarios activos</Title>
@@ -68,26 +37,30 @@ const TableComponent = () => {
             <TableHeaderCell>Nombre</TableHeaderCell>
             <TableHeaderCell>Profesión</TableHeaderCell>
             <TableHeaderCell>Correo</TableHeaderCell>
-            <TableHeaderCell>Estado</TableHeaderCell>
+            <TableHeaderCell>Subscripción</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((item) => (
-            <TableRow key={item.Nombre}>
-              <TableCell>{item.Nombre}</TableCell>
-              <TableCell>
-                <Text>{item.profesion}</Text>
-              </TableCell>
-              <TableCell>
-                <Text>{item.correo}</Text>
-              </TableCell>
-              <TableCell>
-                <Badge color="emerald" icon={StopCircleIcon}>
-                  {item.status}
-                </Badge>
-              </TableCell>
-            </TableRow>
-          ))}
+          {users && users.length > 0
+            ? users.map((usuario) => (
+                <TableRow key={usuario.id}>
+                  <TableCell>{usuario.name}</TableCell>
+                  <TableCell>
+                    <Text>{usuario.rol}</Text>
+                  </TableCell>
+                  <TableCell>
+                    <Text>{usuario.email}</Text>
+                  </TableCell>
+                  <TableCell>
+                    <Badge color="emerald" icon={StopCircleIcon}>
+                      {usuario.subscriptions.length > 0
+                        ? usuario.subscriptions[0].status
+                        : "No cuenta con suscripcion"}
+                    </Badge>
+                  </TableCell>
+                </TableRow>
+              ))
+            : null}
         </TableBody>
       </Table>
     </Card>
