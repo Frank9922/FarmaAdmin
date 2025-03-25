@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import { HomePage } from "../pages/HomePage";
+import { UserPage } from "../pages/UserPage";
 import { LoginPage } from "../pages/LoginPage";
+import PaymentPage from "../pages/PaymentPage";
 
 export const AppRoute = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-
+      <Route path="/users" element={<UserPage />} />
+      <Route path="/payments" element={<PaymentPage />} />
       <Route path="/login" element={<LoginPage />} />
     </Routes>
   );

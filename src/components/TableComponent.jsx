@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { StopCircleIcon } from "@heroicons/react/24/solid";
+
+import {
+  StopCircleIcon,
+  EyeIcon,
+  BanknotesIcon,
+} from "@heroicons/react/24/solid";
 import {
   Badge,
   Card,
@@ -13,13 +18,15 @@ import {
   Title,
 } from "@tremor/react";
 import { api } from "../api/api";
-
+import ModalEdit from "./ModalEdit";
+import ModalSee from "./ModalSee";
+import ModalPayments from "./ModalPayments";
 const TableComponent = () => {
   const [users, setUsers] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const data = await api("usuarios");
-      // console.log(data);
+      console.log(data);
       if (data.status == 200) {
         setUsers(data.data.data);
       }
@@ -30,7 +37,7 @@ const TableComponent = () => {
 
   return (
     <Card className="mt-4">
-      <Title>Listado de Usuarios activos</Title>
+      <Title>Listado de Usuarios</Title>
       <Table className="mt-5">
         <TableHead>
           <TableRow>
@@ -38,6 +45,7 @@ const TableComponent = () => {
             <TableHeaderCell>Profesión</TableHeaderCell>
             <TableHeaderCell>Correo</TableHeaderCell>
             <TableHeaderCell>Subscripción</TableHeaderCell>
+            <TableHeaderCell>Acciones</TableHeaderCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -57,6 +65,13 @@ const TableComponent = () => {
                         ? usuario.subscriptions[0].status
                         : "No cuenta con suscripcion"}
                     </Badge>
+                  </TableCell>
+                  <TableCell>
+                    <div className="inline-flex gap-2 align-middle justify-center items-center">
+                      <ModalSee user={usuario} />
+                      <ModalEdit user={usuario} />
+                      <ModalPayments user={usuario} />
+                    </div>
                   </TableCell>
                 </TableRow>
               ))

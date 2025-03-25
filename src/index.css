@@ -6,11 +6,44 @@ body {
   background-color: #1e293b;
 }
 .option {
-  @apply block space-x-2 cursor-pointer rounded-lg hover:bg-gray-500 hover:text-white lg:p-2   lg:flex items-center  transition-colors;
+  @apply block space-x-2 cursor-pointer rounded-lg hover:bg-gray-500 lg:p-2 hover:text-purple-400   lg:flex items-center  transition-colors;
 }
 .active {
   @apply text-white bg-gray-500;
 }
 * {
   scroll-behavior: smooth;
+}
+.iconBtn {
+  @apply hover:text-purple-400;
+}
+.modal {
+  @apply fixed top-0 left-0 right-0 bottom-0 bg-[#0f0f0fb7] flex justify-center items-center;
+}
+.modalContainer {
+  @apply relative bg-white p-5 rounded  max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl w-full;
+}
+.modalClose {
+  @apply absolute top-0 right-3 cursor-pointer text-2xl;
+}
+.modalTitle {
+  @apply text-lg font-bold text-black mb-2;
+}
+.modalBody {
+  @apply border-b border-gray-900/10  pb-6 mb-2;
+}
+.cont-input {
+  @apply mb-2;
+}
+.label-input {
+  @apply block font-medium text-gray-900 mb-1;
+}
+.input {
+  @apply w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600;
+}
+.btn-save {
+  @apply rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white hover:bg-purple-700;
+}
+.btn-cancel {
+  @apply rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white hover:bg-gray-700;
 }

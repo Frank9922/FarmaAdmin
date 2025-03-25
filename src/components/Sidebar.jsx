@@ -4,7 +4,11 @@ import {
   UsersIcon,
   ArrowLeftStartOnRectangleIcon,
   ClipboardDocumentCheckIcon,
+  ArrowUpTrayIcon,
+  ArrowTopRightOnSquareIcon,
+  BanknotesIcon,
 } from "@heroicons/react/24/solid";
+import { NavLink } from "react-router-dom";
 
 const Sidebar = () => {
   return (
@@ -16,22 +20,26 @@ const Sidebar = () => {
         />
       </a>
       <div className="fixed left-3 space-y-4">
-        <a href="#" className="option">
-          <ChartBarIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
-          <span className="hidden lg:block font-semibold text-white">
-            Dashboard
-          </span>
-        </a>
-        <a href="#" className="option">
+        <NavLink to="/users" className="option">
           <UsersIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
           <span className="hidden lg:block font-semibold text-white">
             Usuarios
           </span>
-        </a>
-        <a href="#" className="option">
-          <EnvelopeIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
+        </NavLink>
+        <NavLink to="/payments" className="option">
+          <BanknotesIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
           <span className="hidden lg:block font-semibold text-white">
-            Correo
+            Pagos
+          </span>
+        </NavLink>
+        <a
+          href="https://www.enfar-medguide.com/compatibilidad"
+          className="option"
+          target="_blank"
+        >
+          <ArrowTopRightOnSquareIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8 " />
+          <span className="hidden lg:block font-semibold text-white ">
+            Vista Usuario
           </span>
         </a>
 

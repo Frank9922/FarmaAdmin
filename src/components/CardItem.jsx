@@ -3,7 +3,7 @@ import { BadgeDelta, Card, Flex, Metric, Text } from "@tremor/react";
 
 const CardItem = () => {
   return (
-    <Card className="w-xs" decoration="top" decorationColor="indigo">
+    <Card className="w-xs" decoration="top" decorationColor="violet">
       <Flex justifyContent="between" alignItems="center">
         <Text>Usuarios Activos</Text>
         <BadgeDelta deltaType="moderateIncrease">+20%</BadgeDelta>
