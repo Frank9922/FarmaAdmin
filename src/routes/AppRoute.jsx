@@ -6,7 +6,7 @@ import PaymentPage from "../pages/PaymentPage";
 export const AppRoute = () => {
   return (
     <Routes>
-      <Route path="/users" element={<UserPage />} />
+      <Route path="/" element={<UserPage />} />
       <Route path="/payments" element={<PaymentPage />} />
       <Route path="/login" element={<LoginPage />} />
     </Routes>

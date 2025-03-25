@@ -24,7 +24,7 @@ const ModalPayments = ({ user }) => {
               &times;
             </span>
             <h2 className="text-lg font-bold text-black mb-2">
-              Editar Usuario
+              Registrar Pago
             </h2>
             <div className="border-b border-gray-900/10 pb-6 mb-2">
               <div className="mb-2">
@@ -40,39 +40,39 @@ const ModalPayments = ({ user }) => {
                   name="name"
                   id="user_id"
                   value={user.name}
+                  readOnly
                 />
               </div>
 
               <div className="mb-2">
                 <label
-                  htmlFor="email"
-                  className="block font-medium text-gray-900 mb-1"
-                >
-                  Correo
-                </label>
-                <input
-                  className="w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600"
-                  type="text"
-                  name="name"
-                  id="email"
-                  value={user.email}
-                />
-              </div>
-              <div className="mb-2">
-                <label
                   htmlFor="type"
                   className="block font-medium text-gray-900 mb-1"
                 >
-                  Tipo usuario
+                  Forma de pago
                 </label>
                 <select
                   className="w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600"
                   name=""
                   id="type"
                 >
-                  <option value="">Administrador</option>
-                  <option value="">Usuario</option>
+                  <option value="">Efectivo</option>
+                  <option value="">Tranferencia</option>
                 </select>
+              </div>
+              <div className="mb-2">
+                <label
+                  htmlFor="email"
+                  className="block font-medium text-gray-900 mb-1"
+                >
+                  Cantidad (pesos)
+                </label>
+                <input
+                  className="w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600"
+                  type="number"
+                  name="name"
+                  id="amoun"
+                />
               </div>
               {/* <div className="mb-2">
                 <div className="block text-gray-900 mb-1">

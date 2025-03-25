@@ -42,7 +42,7 @@ body {
   @apply w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600;
 }
 .btn-save {
-  @apply rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white hover:bg-purple-700;
+  @apply rounded-md bg-[#5D61F7]  px-3 py-2 text-sm font-semibold text-white hover:bg-[#3438ad];
 }
 .btn-cancel {
   @apply rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white hover:bg-gray-700;
