@@ -20,20 +20,13 @@ import {
 import { api } from "../api/api";
 import ModalEdit from "./ModalEdit";
 import ModalSee from "./ModalSee";
+import { useGetUsersQuery } from "../store/api/adminApi";
 
 const TableComponent = () => {
-  const [users, setUsers] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await api.get("/users");
-      console.log(data);
-      if (data.status == 200) {
-        setUsers(data.data.data);
-      }
-    };
+  
+  const { data, isLoading, error } = useGetUsersQuery();
 
-    fetchData();
-  }, []);
+  const users = data?.data || [];
 
   return (
     <Card className="mt-4">
@@ -49,32 +42,48 @@ const TableComponent = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users && users.length > 0
-            ? users.map((usuario) => (
-                <TableRow key={usuario.id}>
-                  <TableCell>{usuario.name}</TableCell>
-                  <TableCell>
-                    <Text>{usuario.rol}</Text>
-                  </TableCell>
-                  <TableCell>
-                    <Text>{usuario.email}</Text>
-                  </TableCell>
-                  <TableCell>
-                    <Badge color="emerald" icon={StopCircleIcon}>
-                      {usuario.subscription
-                        ? usuario.subscription
-                        : "No cuenta con suscripcion"}
-                    </Badge>
-                  </TableCell>
-                  <TableCell>
-                    <div className="inline-flex gap-2 align-middle justify-center items-center">
-                      <ModalSee user={usuario} />
-                      <ModalEdit user={usuario} />
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))
-            : null}
+          {isLoading ? (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center py-4 text-blue-600">
+                Cargando usuarios...
+              </TableCell>
+            </TableRow>
+          ) : error ? (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center py-4 text-red-600">
+                Error al cargar usuarios. Intenta nuevamente.
+              </TableCell>
+            </TableRow>
+          ) : users.length > 0 ? (
+            users.map((usuario) => (
+              <TableRow key={usuario.id}>
+                <TableCell>{usuario.name}</TableCell>
+                <TableCell>
+                  <Text>{usuario.rol}</Text>
+                </TableCell>
+                <TableCell>
+                  <Text>{usuario.email}</Text>
+                </TableCell>
+                <TableCell>
+                  <Badge color={usuario.subscription ? "emerald" : "red"} icon={StopCircleIcon}>
+                    {usuario.subscription ? usuario.subscription.status : "No cuenta con suscripción"}
+                  </Badge>
+                </TableCell>
+                <TableCell>
+                  <div className="inline-flex gap-2 align-middle justify-center items-center">
+                    <ModalSee user={usuario} />
+                    <ModalEdit user={usuario} />
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={5} className="text-center py-4 text-gray-500">
+                No hay usuarios registrados.
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </Card>

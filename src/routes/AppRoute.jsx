@@ -1,14 +1,43 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { UserPage } from "../pages/UserPage";
 import { LoginPage } from "../pages/LoginPage";
 import PaymentPage from "../pages/PaymentPage";
+import { useCheckAuth } from "../hooks/useCheckAuth";
+import { useSelector } from "react-redux";
+import { estados } from "../store/slices/auth/estados";
+import { DashboardRoute } from "./DashboardRoute";
 
 export const AppRoute = () => {
+
+  const status = useSelector(state => state.auth.estado);
+
+  const location = useLocation();
+
+  useCheckAuth();
+
   return (
-    <Routes>
-      <Route path="/" element={<UserPage />} />
-      <Route path="/payments" element={<PaymentPage />} />
-      <Route path="/login" element={<LoginPage />} />
+    <Routes location={location} key={location.pathname}>
+      
+
+      {
+        status === estados.autenticado ?
+        <>
+              <Route path="/" element={<DashboardRoute/>} />
+              <Route path="/*" element={<DashboardRoute/>} />
+              <Route path="/login" element={<Navigate to="/"/>} />
+
+        </>
+        :(
+        <>    
+              <Route path="/*" element={<Navigate to='/login' />} />
+              <Route path="/login" element={<LoginPage />} />
+
+        </>
+        )
+      }
+
+
+
     </Routes>
   );
 };

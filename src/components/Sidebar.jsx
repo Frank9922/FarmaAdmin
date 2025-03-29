@@ -1,16 +1,27 @@
 import {
-  ChartBarIcon,
-  EnvelopeIcon,
   UsersIcon,
   ArrowLeftStartOnRectangleIcon,
   ClipboardDocumentCheckIcon,
-  ArrowUpTrayIcon,
   ArrowTopRightOnSquareIcon,
   BanknotesIcon,
 } from "@heroicons/react/24/solid";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../store/slices/auth/authSlice";
 
 const Sidebar = () => {
+
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+
+    dispatch(logout());
+
+
+
+
+  }
+
   return (
     <div className="bg-slate-800 flex-none w-14 lg:w-44 transition-all delay-200 ease-linear">
       <a href="#" className="h-20 mb-4 items-center justify-center flex ">
@@ -57,12 +68,14 @@ const Sidebar = () => {
         /> */}
       </div>
       <div className="fixed bottom-4 left-3">
-        <a className="option">
+        <button
+         onClick={onLogout}
+         className="option">
           <ArrowLeftStartOnRectangleIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
           <span className="hidden lg:block font-semibold text-white">
             Salir
           </span>
-        </a>
+        </button>
       </div>
     </div>
   );
