@@ -43,11 +43,11 @@ const ModalSee = ({ user }) => {
                 <div className="flex flex-wrap p-3 justify-between">
                   <p>
                     <span className="underline">Suscripción</span>:{" "}
-                    {user.subscriptions[0].status}
+                    {user.subscription}
                   </p>
-                  <p>
+                  {/* <p>
                     <span className="underline">Tipo Subscripción</span>:{" "}
-                    {user.subscriptions[0].type}
+                    {user.subscription}
                   </p>
                   <p>
                     <span className="underline">Vto.</span>:{" "}
@@ -71,7 +71,7 @@ const ModalSee = ({ user }) => {
                   <p>
                     <span className="underline">Vto.</span>:{" "}
                     {user.subscriptions[0].ends_at}
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>

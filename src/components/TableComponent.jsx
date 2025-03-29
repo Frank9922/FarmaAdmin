@@ -20,12 +20,12 @@ import {
 import { api } from "../api/api";
 import ModalEdit from "./ModalEdit";
 import ModalSee from "./ModalSee";
-import ModalPayments from "./ModalPayments";
+
 const TableComponent = () => {
   const [users, setUsers] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
-      const data = await api("usuarios");
+      const data = await api.get("/users");
       console.log(data);
       if (data.status == 200) {
         setUsers(data.data.data);
@@ -61,8 +61,8 @@ const TableComponent = () => {
                   </TableCell>
                   <TableCell>
                     <Badge color="emerald" icon={StopCircleIcon}>
-                      {usuario.subscriptions.length > 0
-                        ? usuario.subscriptions[0].status
+                      {usuario.subscription
+                        ? usuario.subscription
                         : "No cuenta con suscripcion"}
                     </Badge>
                   </TableCell>
@@ -70,7 +70,6 @@ const TableComponent = () => {
                     <div className="inline-flex gap-2 align-middle justify-center items-center">
                       <ModalSee user={usuario} />
                       <ModalEdit user={usuario} />
-                      <ModalPayments user={usuario} />
                     </div>
                   </TableCell>
                 </TableRow>

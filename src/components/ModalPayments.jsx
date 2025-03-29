@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BanknotesIcon } from "@heroicons/react/24/solid";
-const ModalPayments = ({ user }) => {
+const ModalPayments = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
@@ -9,8 +9,8 @@ const ModalPayments = ({ user }) => {
   return (
     <div>
       {/* Botón que abre el modal */}
-      <button onClick={openModal}>
-        <BanknotesIcon width={25} className="hover:text-purple-400" />
+      <button onClick={openModal} className="btn-save">
+        Registrar Pago
       </button>
 
       {/* Modal */}
@@ -39,11 +39,24 @@ const ModalPayments = ({ user }) => {
                   type="text"
                   name="name"
                   id="user_id"
-                  value={user.name}
-                  readOnly
+                  value=""
                 />
               </div>
-
+              <div className="mb-2">
+                <label
+                  htmlFor="ends_at"
+                  className="block font-medium text-gray-900 mb-1"
+                >
+                  Periodo
+                </label>
+                <input
+                  className="w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600"
+                  type="date"
+                  name="ends_at"
+                  id="ends_at"
+                  value=""
+                />
+              </div>
               <div className="mb-2">
                 <label
                   htmlFor="type"
@@ -65,7 +78,7 @@ const ModalPayments = ({ user }) => {
                   htmlFor="email"
                   className="block font-medium text-gray-900 mb-1"
                 >
-                  Cantidad (pesos)
+                  Monto (pesos)
                 </label>
                 <input
                   className="w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600"
@@ -74,19 +87,6 @@ const ModalPayments = ({ user }) => {
                   id="amoun"
                 />
               </div>
-              {/* <div className="mb-2">
-                <div className="block text-gray-900 mb-1">
-                  Cambiar estado de la Subscripción
-                </div>
-                <div>
-                  <input type="radio" name="status" id="active" />
-                  <label htmlFor="active">Activo</label>
-                </div>
-                <div>
-                  <input type="radio" name="status" id="inactive" />
-                  <label htmlFor="inactive">Inactivo</label>
-                </div>
-              </div> */}
             </div>
             <div className="flex justify-end gap-1">
               <button
@@ -96,7 +96,7 @@ const ModalPayments = ({ user }) => {
                 Cancelar
               </button>
               <button className="rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white hover:bg-purple-700">
-                Guardar
+                Registrar
               </button>
             </div>
           </div>

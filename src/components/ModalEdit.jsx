@@ -6,6 +6,19 @@ const ModalEdit = ({ user }) => {
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
+  const [formData, setFormData] = useState({
+    name: user.name,
+    email: user.email,
+    rol: user.rol,
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <div>
       {/* Botón que abre el modal */}
@@ -31,7 +44,8 @@ const ModalEdit = ({ user }) => {
                   type="text"
                   name="name"
                   id="user_id"
-                  value={user.name}
+                  value={formData.name}
+                  onChange={handleChange}
                 />
               </div>
 
@@ -42,16 +56,23 @@ const ModalEdit = ({ user }) => {
                 <input
                   className="input"
                   type="text"
-                  name="name"
+                  name="email"
                   id="email"
-                  value={user.email}
+                  value={formData.email}
+                  onChange={handleChange}
                 />
               </div>
               <div className="cont-input">
-                <label htmlFor="type" className="label-input">
+                <label htmlFor="rol" className="label-input">
                   Tipo usuario
                 </label>
-                <select className="input" name="" id="type">
+                <select
+                  className="input"
+                  name="rol"
+                  id="rol"
+                  value={formData.rol}
+                  onChange={handleChange}
+                >
                   <option value="">Administrador</option>
                   <option value="">Usuario</option>
                 </select>

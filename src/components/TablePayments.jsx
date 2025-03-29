@@ -1,4 +1,5 @@
 import React from "react";
+import ModalPayments from "./ModalPayments";
 import {
   Badge,
   Card,
@@ -32,7 +33,7 @@ const TablePayments = () => {
       <Card className="mt-4">
         <div className="flex justify-between items-center mb-4">
           <Title>Listado de Pagos</Title>
-          <button className="btn-save">Registrar Pago</button>
+          <ModalPayments></ModalPayments>
         </div>
 
         <Table className="mt-5">
