@@ -1,8 +1,9 @@
-import { checkingCredentials, login, logout } from '../store/slices/auth/authSlice'
+import { login, checkingCredentials, logout } from "../store/slices/auth/authSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { api } from '../api/api';
+import { api } from "../api/api";
+
 
 
 export const useCheckAuth = () => {
@@ -12,13 +13,13 @@ export const useCheckAuth = () => {
   const token = localStorage.getItem('token');
   useEffect(() => {
 
+    dispatch(checkingCredentials());
+
       if (!token) {
 
         dispatch(logout());
         return;
       }
-
-      dispatch(checkingCredentials());
 
       api.get('/user', {
         headers: {
@@ -28,12 +29,14 @@ export const useCheckAuth = () => {
     .then((response) => {
       
       dispatch(login(response.data.user));
-      navigate('/');
+      
+      navigate('/users');
 
     })
 
     .catch((error) => {
 
+      console.log(error);
       localStorage.removeItem('token');
         
      dispatch(logout())

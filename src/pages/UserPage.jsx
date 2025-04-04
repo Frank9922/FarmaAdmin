@@ -1,24 +1,10 @@
 import LeftColumn from "../components/LeftColumn";
-import Navbar from "../components/Navbar";
-import RightColumn from "../components/RightColumn";
-import Sidebar from "../components/Sidebar";
+import { DashboardLayout } from "../layouts/DashboardLayout";
 
 export const UserPage = () => {
   return (
-    <main className="flex ">
-      <Sidebar />
-      <div className="flex flex-col flex-1 relative">
-        <Navbar title={"Gestionar Usuarios"} />
-
-        <div className="grid md:grid-cols-1 grid-cols-1 w-full">
-          <div className="col-span-2">
+    <DashboardLayout title="Gestionar Usuarios">
             <LeftColumn />
-          </div>
-          {/* <div className="w-full">
-            <RightColumn />
-          </div> */}
-        </div>
-      </div>
-    </main>
+    </DashboardLayout>
   );
 };

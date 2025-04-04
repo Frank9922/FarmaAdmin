@@ -52,7 +52,6 @@ export const LoginPage = () => {
 
       const fulltoken= token.replaceAll('"', '')
 
-      console.log(fulltoken)
 
       localStorage.setItem("token", fulltoken);
 
@@ -61,7 +60,7 @@ export const LoginPage = () => {
 
     } catch(error) {
 
-
+      return
     }
 
 

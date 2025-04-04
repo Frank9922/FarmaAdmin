@@ -1,10 +1,3 @@
-import React, { useEffect, useState } from "react";
-
-import {
-  StopCircleIcon,
-  EyeIcon,
-  BanknotesIcon,
-} from "@heroicons/react/24/solid";
 import {
   Badge,
   Card,
@@ -16,17 +9,28 @@ import {
   TableRow,
   Text,
   Title,
+  Button,
 } from "@tremor/react";
-import { api } from "../api/api";
 import ModalEdit from "./ModalEdit";
 import ModalSee from "./ModalSee";
 import { useGetUsersQuery } from "../store/api/adminApi";
+import { StopCircleIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
 
 const TableComponent = () => {
-  
   const { data, isLoading, error } = useGetUsersQuery();
+  const users = data || [];
 
-  const users = data?.data || [];
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  // Calcular el índice de los usuarios a mostrar en la página actual
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedUsers = users.slice(startIndex, endIndex);
+
+  // Calcular el total de páginas
+  const totalPages = Math.ceil(users.length / itemsPerPage);
 
   return (
     <Card className="mt-4">
@@ -55,11 +59,11 @@ const TableComponent = () => {
               </TableCell>
             </TableRow>
           ) : users.length > 0 ? (
-            users.map((usuario) => (
+            paginatedUsers.map((usuario) => (
               <TableRow key={usuario.id}>
                 <TableCell>{usuario.name}</TableCell>
                 <TableCell>
-                  <Text>{usuario.rol}</Text>
+                  <Text>{usuario.profesion?.name || "Sin profesión"}</Text>
                 </TableCell>
                 <TableCell>
                   <Text>{usuario.email}</Text>
@@ -86,6 +90,29 @@ const TableComponent = () => {
           )}
         </TableBody>
       </Table>
+
+      {/* Paginación */}
+      {users.length > itemsPerPage && (
+        <div className="flex justify-center items-center mt-4 gap-2">
+          <Button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+            variant="light"
+          >
+            Anterior
+          </Button>
+          <span className="text-gray-700">
+            Página {currentPage} de {totalPages}
+          </span>
+          <Button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+            variant="light"
+          >
+            Siguiente
+          </Button>
+        </div>
+      )}
     </Card>
   );
 };

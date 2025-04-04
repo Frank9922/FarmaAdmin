@@ -1,7 +1,5 @@
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { UserPage } from "../pages/UserPage";
 import { LoginPage } from "../pages/LoginPage";
-import PaymentPage from "../pages/PaymentPage";
 import { useCheckAuth } from "../hooks/useCheckAuth";
 import { useSelector } from "react-redux";
 import { estados } from "../store/slices/auth/estados";

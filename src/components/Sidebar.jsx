@@ -6,7 +6,7 @@ import {
   BanknotesIcon,
 } from "@heroicons/react/24/solid";
 import { useDispatch } from "react-redux";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { logout } from "../store/slices/auth/authSlice";
 
 const Sidebar = () => {
@@ -31,7 +31,7 @@ const Sidebar = () => {
         />
       </a>
       <div className="fixed left-3 space-y-4">
-        <NavLink to="/" className="option">
+        <NavLink to="/users" className="option">
           <UsersIcon className="p-2 w-10 rounded-lg text-gray-300 lg:w-8" />
           <span className="hidden lg:block font-semibold text-white">
             Usuarios

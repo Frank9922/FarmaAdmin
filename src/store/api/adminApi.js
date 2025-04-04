@@ -36,13 +36,45 @@ export const adminApi = createApi({
             })
         }),
 
+        getUser: builder.query({
+            query: () => ({
+                url: '/user',
+                method: 'GET'
+            })
+        }),
+
         getUsers: builder.query({
             query: () => ({
                 url: '/users',
                 method: 'GET'
-            })
+            }),
+            providesTags: ['Users'],
+        }),
+
+        getProfesion: builder.query({
+            query: () => ({
+                url: '/profesions',
+                method: 'GET'
+            }),
+            providesTags: ['Profesions'],
+        }),
+
+        updateUser: builder.mutation({
+            query: ({userId, updateUser}) => ({
+                url: `/users/${userId}`,
+                method: 'PUT',
+                body: updateUser
+            }),
+            invalidatesTags: ['Users'],
+            
         })
 
     })
 })
-export const { useLoginMutation, useGetUsersQuery } = adminApi;
+export const { 
+    useLoginMutation,
+    useUpdateUserMutation,
+    useGetUsersQuery,
+    useGetUserQuery,
+    useGetProfesionQuery
+} = adminApi;
