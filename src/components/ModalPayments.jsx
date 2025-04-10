@@ -1,7 +1,64 @@
-import React, { useState } from "react";
-import { BanknotesIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
+import Select from "react-select";
+import { useCreatePaymentMutation, useGetUsersQuery } from "../store/api/adminApi";
+import { useForm } from "../hooks/useForm";
+
+
+
+const initialForm = {
+  subscription_id: '',
+  amount:'',
+  payment_method: ''
+}
+
+const formValidation = {
+  subscription_id: [(value) => Number.isInteger(Number(value)), "El usuario debe ser valido."],
+  amount: [(value) => value.length > 1, "El monto debe ser un numero positivo"],
+  payment_method: [(value) => value.length > 1, "El metodo de pago debe ser valido"],
+}
+
 const ModalPayments = () => {
+
+  const [registerPayment, {isLoading: isLoadingPayment, isError : isErrorPayment, isSuccess : isSuccessPayment}] = useCreatePaymentMutation()
+
+  const {
+    subscription_id, 
+    subscription_idValid, 
+    amount, 
+    amountValid, 
+    payment_method, 
+    payment_methodValid, 
+    onInputChange, 
+    formState, 
+    isFormValid, setFormState} = useForm(initialForm)
+
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data, isLoading, isSuccess } = useGetUsersQuery();
+
+  const [selectedUser, setSelectedUser] = useState("");
+
+  const handleSelectChange = (e) => {
+
+    setSelectedUser(e);
+
+    setFormState(prevState => ({
+      ...prevState,  
+      subscription_id: e.value
+   
+    })
+
+  );
+}
+
+const onSubmit = async() => {
+
+  await registerPayment(formState).unwrap();
+
+  setIsOpen(false);
+
+} 
+
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -32,29 +89,20 @@ const ModalPayments = () => {
                   htmlFor="user_id"
                   className="block font-medium text-gray-900 mb-1"
                 >
-                  Nombre
+                  Usuario
                 </label>
-                <input
-                  className="w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600"
-                  type="text"
-                  name="name"
-                  id="user_id"
-                  value=""
-                />
-              </div>
-              <div className="mb-2">
-                <label
-                  htmlFor="ends_at"
-                  className="block font-medium text-gray-900 mb-1"
-                >
-                  Periodo
-                </label>
-                <input
-                  className="w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600"
-                  type="date"
-                  name="ends_at"
-                  id="ends_at"
-                  value=""
+                <Select
+                  options={[
+                    {value: '', label: 'Selecciona una opcion'},
+                    ...data.map((user) => ({
+                    value: user.subscription.id,
+                    label: user.name,
+                  }))
+                ]}
+                  value={selectedUser}
+                  onChange={handleSelectChange}
+                  className="input"
+                  name="subscription_id"
                 />
               </div>
               <div className="mb-2">
@@ -66,16 +114,19 @@ const ModalPayments = () => {
                 </label>
                 <select
                   className="w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600"
-                  name=""
+                  name="payment_method"
+                  onChange={onInputChange}
+                  value={payment_method}
                   id="type"
                 >
-                  <option value="">Efectivo</option>
-                  <option value="">Tranferencia</option>
+                  <option value=''> Selecciona una opcion</option>
+                  <option value="efectivo">Efectivo</option>
+                  <option value="transferencia">Tranferencia</option>
                 </select>
               </div>
               <div className="mb-2">
                 <label
-                  htmlFor="email"
+                  htmlFor="amount"
                   className="block font-medium text-gray-900 mb-1"
                 >
                   Monto (pesos)
@@ -83,8 +134,9 @@ const ModalPayments = () => {
                 <input
                   className="w-full text-base rounded focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-purple-600"
                   type="number"
-                  name="name"
-                  id="amoun"
+                  name="amount"
+                  value={amount}
+                  onChange={onInputChange}
                 />
               </div>
             </div>
@@ -95,7 +147,9 @@ const ModalPayments = () => {
               >
                 Cancelar
               </button>
-              <button className="rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white hover:bg-purple-700">
+              <button
+              onClick={onSubmit}
+              className="rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white hover:bg-purple-700">
                 Registrar
               </button>
             </div>

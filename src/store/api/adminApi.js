@@ -67,6 +67,31 @@ export const adminApi = createApi({
             }),
             invalidatesTags: ['Users'],
             
+        }),
+
+        getPayments: builder.query({
+            query:() => ({
+                url: '/payments',
+                method: 'GET'
+            }),
+            providesTags: ['Payments'],
+        }),
+
+        createPayment: builder.mutation({
+            query: (createPayment) => ({
+                url: '/payments',
+                method: 'POST',
+                body: createPayment
+            }),
+            invalidatesTags: ['Payments']
+        }),
+
+        destroyPayment: builder.mutation({
+            query: (paymentId) => ({
+                url: `/payments/${paymentId}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Payments']
         })
 
     })
@@ -76,5 +101,8 @@ export const {
     useUpdateUserMutation,
     useGetUsersQuery,
     useGetUserQuery,
-    useGetProfesionQuery
+    useGetProfesionQuery,
+    useGetPaymentsQuery,
+    useCreatePaymentMutation,
+    useDestroyPaymentMutation
 } = adminApi;
