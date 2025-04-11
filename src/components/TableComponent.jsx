@@ -39,7 +39,6 @@ const TableComponent = () => {
         <TableHead>
           <TableRow>
             <TableHeaderCell>Nombre</TableHeaderCell>
-            <TableHeaderCell>Profesión</TableHeaderCell>
             <TableHeaderCell>Correo</TableHeaderCell>
             <TableHeaderCell>Subscripción</TableHeaderCell>
             <TableHeaderCell>Acciones</TableHeaderCell>
@@ -63,14 +62,16 @@ const TableComponent = () => {
               <TableRow key={usuario.id}>
                 <TableCell>{usuario.name}</TableCell>
                 <TableCell>
-                  <Text>{usuario.profesion?.name || "Sin profesión"}</Text>
-                </TableCell>
-                <TableCell>
                   <Text>{usuario.email}</Text>
                 </TableCell>
                 <TableCell>
-                  <Badge color={usuario.subscription ? "emerald" : "red"} icon={StopCircleIcon}>
-                    {usuario.subscription ? usuario.subscription.status : "No cuenta con suscripción"}
+                  <Badge
+                    color={usuario.subscription ? "emerald" : "red"}
+                    icon={StopCircleIcon}
+                  >
+                    {usuario.subscription
+                      ? usuario.subscription.status
+                      : "No cuenta con suscripción"}
                   </Badge>
                 </TableCell>
                 <TableCell>
@@ -105,7 +106,9 @@ const TableComponent = () => {
             Página {currentPage} de {totalPages}
           </span>
           <Button
-            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            }
             disabled={currentPage === totalPages}
             variant="light"
           >

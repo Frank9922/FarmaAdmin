@@ -1,64 +1,72 @@
 import { useState } from "react";
 import Select from "react-select";
-import { useCreatePaymentMutation, useGetUsersQuery } from "../store/api/adminApi";
+import {
+  useCreatePaymentMutation,
+  useGetUsersQuery,
+} from "../store/api/adminApi";
 import { useForm } from "../hooks/useForm";
 
-
-
 const initialForm = {
-  subscription_id: '',
-  amount:'',
-  payment_method: ''
-}
+  subscription_id: "",
+  amount: "",
+  payment_method: "",
+};
 
 const formValidation = {
-  subscription_id: [(value) => Number.isInteger(Number(value)), "El usuario debe ser valido."],
+  subscription_id: [
+    (value) => Number.isInteger(Number(value)),
+    "El usuario debe ser valido.",
+  ],
   amount: [(value) => value.length > 1, "El monto debe ser un numero positivo"],
-  payment_method: [(value) => value.length > 1, "El metodo de pago debe ser valido"],
-}
+  payment_method: [
+    (value) => value.length > 1,
+    "El metodo de pago debe ser valido",
+  ],
+};
 
 const ModalPayments = () => {
-
-  const [registerPayment, {isLoading: isLoadingPayment, isError : isErrorPayment, isSuccess : isSuccessPayment}] = useCreatePaymentMutation()
+  const [
+    registerPayment,
+    {
+      isLoading: isLoadingPayment,
+      isError: isErrorPayment,
+      isSuccess: isSuccessPayment,
+    },
+  ] = useCreatePaymentMutation();
 
   const {
-    subscription_id, 
-    subscription_idValid, 
-    amount, 
-    amountValid, 
-    payment_method, 
-    payment_methodValid, 
-    onInputChange, 
-    formState, 
-    isFormValid, setFormState} = useForm(initialForm)
+    subscription_id,
+    subscription_idValid,
+    amount,
+    amountValid,
+    payment_method,
+    payment_methodValid,
+    onInputChange,
+    formState,
+    isFormValid,
+    setFormState,
+  } = useForm(initialForm);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const { data, isLoading, isSuccess } = useGetUsersQuery();
-
+  console.log("modalpayment:", data);
   const [selectedUser, setSelectedUser] = useState("");
 
   const handleSelectChange = (e) => {
-
     setSelectedUser(e);
 
-    setFormState(prevState => ({
-      ...prevState,  
-      subscription_id: e.value
-   
-    })
+    setFormState((prevState) => ({
+      ...prevState,
+      subscription_id: e.value,
+    }));
+  };
 
-  );
-}
+  const onSubmit = async () => {
+    await registerPayment(formState).unwrap();
 
-const onSubmit = async() => {
-
-  await registerPayment(formState).unwrap();
-
-  setIsOpen(false);
-
-} 
-
+    setIsOpen(false);
+  };
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -93,12 +101,12 @@ const onSubmit = async() => {
                 </label>
                 <Select
                   options={[
-                    {value: '', label: 'Selecciona una opcion'},
+                    { value: "", label: "Selecciona una opcion" },
                     ...data.map((user) => ({
-                    value: user.subscription.id,
-                    label: user.name,
-                  }))
-                ]}
+                      value: user.subscription.id,
+                      label: user.name,
+                    })),
+                  ]}
                   value={selectedUser}
                   onChange={handleSelectChange}
                   className="input"
@@ -119,7 +127,7 @@ const onSubmit = async() => {
                   value={payment_method}
                   id="type"
                 >
-                  <option value=''> Selecciona una opcion</option>
+                  <option value=""> Selecciona una opcion</option>
                   <option value="efectivo">Efectivo</option>
                   <option value="transferencia">Tranferencia</option>
                 </select>
@@ -148,8 +156,9 @@ const onSubmit = async() => {
                 Cancelar
               </button>
               <button
-              onClick={onSubmit}
-              className="rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white hover:bg-purple-700">
+                onClick={onSubmit}
+                className="rounded-md bg-purple-600 px-3 py-2 text-sm font-semibold text-white hover:bg-purple-700"
+              >
                 Registrar
               </button>
             </div>

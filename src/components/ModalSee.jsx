@@ -37,26 +37,26 @@ const ModalSee = ({ user }) => {
                 </div>
               </div>
               {user.subscription && (
-              <div className="dataSubscription">
-                <h3 className="font-semibold text-black">
-                  Datos Suscripción y pagos
-                </h3>
-                <div className="flex flex-wrap p-3 justify-between">
-                  <p>
-                    <span className="underline">Suscripción</span>:{" "}
-                    {user.subscription.status}
-                  </p>
-                  <p>
-                    <span className="underline">Tipo Subscripción</span>:{" "}
-                    {user.subscription.type}
-                  </p>
-                  <p>
-                    <span className="underline">Vto.</span>:{" "}
-                    {user.subscription.ends_at}
-                  </p>
+                <div className="dataSubscription">
+                  <h3 className="font-semibold text-black">
+                    Datos Suscripción y pagos
+                  </h3>
+                  <div className="flex flex-wrap p-3 justify-between">
+                    <p>
+                      <span className="underline">Suscripción</span>:{" "}
+                      {user.subscription.status}
+                    </p>
+                    <p>
+                      <span className="underline">Tipo Subscripción</span>:{" "}
+                      {user.subscription.type}
+                    </p>
+                    <p>
+                      <span className="underline">Vto.</span>:{" "}
+                      {user.subscription.ends_at}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
             </div>
             <div className="flex justify-end gap-1">
               <button className="btn-cancel" onClick={closeModal}>

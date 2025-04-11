@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { EyeIcon } from "@heroicons/react/24/solid";
 
-
 export const ModalEditPayment = ({ payment }) => {
-
   const [isOpen, setIsOpen] = useState(false);
 
   console.log(payment);
@@ -25,49 +23,25 @@ export const ModalEditPayment = ({ payment }) => {
             <span className="modalClose" onClick={closeModal}>
               &times;
             </span>
-            <h2 className="modalTitle">Editar Usuario</h2>
+            <h2 className="modalTitle">
+              Informacion pago - {payment.subscription.user.name}
+            </h2>
             <div className="modalBody">
-              <div className="cont-input">
-                <label htmlFor="user_id" className="label-input">
-                  Nombre
-                </label>
-                <input
-                  className="input"
-                  type="text"
-                  name="name"
-                  id="user_id"
-                />
-              </div>
-
-              <div className="cont-input">
-                <label htmlFor="email" className="label-input">
-                  Correo
-                </label>
-                <input
-                  className="input"
-                  type="text"
-                  name="email"
-                  id="email"
-                />
-              </div>
-              <div className="cont-input">
-              <label htmlFor="profesion" className="label-input">
-                
-              </label>
-            </div>;
-
-              <div className="cont-input">
-                <label htmlFor="rol" className="label-input">
-                  Tipo usuario
-                </label>
-                <select
-                  className="input"
-                  name="rol"
-                  id="rol"
-                >
-                  <option value="admin">Administrador</option>
-                  <option value="user">Usuario</option>
-                </select>
+              <div className="dataPersonal">
+                <h3 className="font-semibold text-black">Datos Personales</h3>
+                <div className="flex flex-wrap p-3 justify-between">
+                  <p>
+                    <span className="underline">Fecha</span>:{" "}
+                    {payment.created_at}
+                  </p>
+                  <p>
+                    <span className="underline">Forma de Pago</span>:{" "}
+                    {payment.payment_method}
+                  </p>
+                  <p>
+                    <span className="underline">Monto</span>: ${payment.amount}
+                  </p>
+                </div>
               </div>
             </div>
             <div className="flex justify-end gap-1">
@@ -81,4 +55,3 @@ export const ModalEditPayment = ({ payment }) => {
     </div>
   );
 };
-
