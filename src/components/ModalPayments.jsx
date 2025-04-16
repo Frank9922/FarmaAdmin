@@ -50,7 +50,6 @@ const ModalPayments = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { data, isLoading, isSuccess } = useGetUsersQuery();
-  console.log("modalpayment:", data);
   const [selectedUser, setSelectedUser] = useState("");
 
   const handleSelectChange = (e) => {

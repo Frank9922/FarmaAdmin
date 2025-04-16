@@ -30,7 +30,7 @@ export const adminApi = createApi({
 
         login: builder.mutation({
             query: (user) => ({
-                url: '/login',
+                url: '/loginAdmin',
                 method: 'POST',
                 body: user
             })
@@ -83,7 +83,7 @@ export const adminApi = createApi({
                 method: 'POST',
                 body: createPayment
             }),
-            invalidatesTags: ['Payments']
+            invalidatesTags: ['Payments', 'Users']
         }),
 
         destroyPayment: builder.mutation({
@@ -91,7 +91,7 @@ export const adminApi = createApi({
                 url: `/payments/${paymentId}`,
                 method: 'DELETE',
             }),
-            invalidatesTags: ['Payments']
+            invalidatesTags: ['Payments', 'Users']
         })
 
     })

@@ -40,6 +40,7 @@ const TableComponent = () => {
           <TableRow>
             <TableHeaderCell>Nombre</TableHeaderCell>
             <TableHeaderCell>Correo</TableHeaderCell>
+            <TableHeaderCell>Profesion</TableHeaderCell>
             <TableHeaderCell>Subscripción</TableHeaderCell>
             <TableHeaderCell>Acciones</TableHeaderCell>
           </TableRow>
@@ -65,8 +66,11 @@ const TableComponent = () => {
                   <Text>{usuario.email}</Text>
                 </TableCell>
                 <TableCell>
+                  <Text>{usuario.profesion.name}</Text>
+                </TableCell>
+                <TableCell>
                   <Badge
-                    color={usuario.subscription ? "emerald" : "red"}
+                    color={usuario.subscription.status === "active" ? "emerald" : "red"}
                     icon={StopCircleIcon}
                   >
                     {usuario.subscription

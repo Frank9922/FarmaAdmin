@@ -4,6 +4,7 @@ import { Modal } from "../components/Modal";
 import { useLoginMutation } from "../store/api/adminApi";
 import { useDispatch } from "react-redux";
 import { login } from "../store/slices/auth/authSlice";
+import { useSyncExternalStore } from "react";
 
 
 const initialForm = {
@@ -26,6 +27,7 @@ export const LoginPage = () => {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [errorMessage, seterrorMessage] = useState(null);
 
   const {
     email,
@@ -41,6 +43,8 @@ export const LoginPage = () => {
   const onSubmit = async(event) => {
 
     event.preventDefault();
+
+    seterrorMessage(null);
 
     setFormSubmitted(true);
 
@@ -59,6 +63,10 @@ export const LoginPage = () => {
       
 
     } catch(error) {
+
+        if(error.status === 400) {
+          seterrorMessage("No tiene permisos para acceder.");
+        }
 
       return
     }
@@ -90,10 +98,15 @@ export const LoginPage = () => {
            className="bg-white text-center rounded-xl px-6 py-8 space-y-6 max-w-md md:ml-auto w-full">
             <h3 className="text-3xl font-extrabold mb-12">Iniciar sesión</h3>
 
-{/* 
-            <div className="bg-red-100 text-red-600 py-2 px-4 rounded-md text-sm border border-red-400">
-              Credenciales incorrectas. Inténtalo de nuevo.
-            </div> */}
+            {
+              errorMessage && (
+                <div className="bg-red-100 text-red-600 py-2 px-4 rounded-md text-sm border border-red-400">
+                {errorMessage}
+              </div>
+              )
+            }
+
+
 
             <div>
               <input

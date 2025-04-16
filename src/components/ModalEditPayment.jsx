@@ -4,7 +4,6 @@ import { EyeIcon } from "@heroicons/react/24/solid";
 export const ModalEditPayment = ({ payment }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(payment);
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);

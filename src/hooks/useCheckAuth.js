@@ -36,7 +36,6 @@ export const useCheckAuth = () => {
 
     .catch((error) => {
 
-      console.log(error);
       localStorage.removeItem('token');
         
      dispatch(logout())
